@@ -1,0 +1,58 @@
+<% include partes/_header %>
+    <br>
+    <div class="horizontal">
+        <div class="vertical">
+            <div class="row mt-5">
+                <!-- <img src="https://cdni.rt.com/actualidad/public_images/2017.01/article/588d82ccc46188be6d8b4576.jpg?v=2" alt="los deudores" width="800" height="375"> -->
+            </div>            
+        </div>
+    </div>
+    <br>
+    <center>
+        <form action="/registrar" method="get">
+            <button type="submit" class="btn btn-primary">
+                REGISTRAR
+            </button>
+        </form>
+    </center>    
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-7">
+                <h2>    Lista de Deudores</h2>
+                <br>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>codigo</th>
+                            <th>nombre</th>
+                            <th>apellido</th>
+                            <th>deuda</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if(data) { %>
+                            <% for(var i=0; i< data.length; i++) { %>
+                                <tr>
+                                    <td><%= data[i].id %></td>
+                                    <td><%= data[i].nombre %></td>
+                                    <td><%= data[i].apellido %></td>
+                                    <td><%= data[i].deuda %></td>
+                                    <td>
+                                        <% if(!data[i].cancelado) { %>
+                                        <form action="/pagar/<%= data[i].id %>" method="POST">
+                                            <button type="submit">Cancelar Deuda</button>
+                                        </form>
+                                        <% } else {%>
+                                            Deuda Cancelada
+                                        <% } %>
+                                    </td>
+                                </tr>
+                            <% } %> 
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>    
+<% include partes/_final %>
